@@ -8,28 +8,26 @@ class SongList extends Component{
 
     onSongDelete(id){
         this.props.mutate({
-            variables: {id}
-            //refetchQueries: [{query: fetchQuery}]
-        }).then(() => this.props.data.refetch());
+          variables: {id},
+          refetchQueries: [{query: fetchQuery}]
+        });
     }
-
 
     renderSongs () {
      return this.props.data.songs.map(
-         song => {
+       ({title, id}) => {
              return (
-
-                 <li key={song.id} className="collection-item">
-                     {song.title}
+                 <li key={id} className="collection-item"><Link to={`/songs/${id}`}>
+                 {title}
+               </Link>
                      <i
                          className="material-icons"
-                         onClick={() => this.onSongDelete(song.id)}
+                         onClick={() => this.onSongDelete(id)}
                      >delete_forever</i>
                  </li>
-
-             )
+             );
          }
-     )
+     );
     }
 
     render () {
@@ -44,10 +42,9 @@ class SongList extends Component{
                         <i className="material-icons">add</i>
                     </Link>
                 </div>
-            )
+            );
         }
-        return (<div>Loading...</div>)
-
+      return (<div>Loading...</div>);
     }
 }
 

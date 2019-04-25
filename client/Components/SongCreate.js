@@ -8,10 +8,10 @@ import {Link, hashHistory} from 'react-router';
 class SongCreate extends Component{
 
     constructor(props){
-        super(props)
+      super(props);
         this.state = {
             title: ''
-        }
+        };
     }
 
     onSubmit(e){
@@ -23,9 +23,8 @@ class SongCreate extends Component{
             refetchQueries: [{
                 query: fetchQuery
             }]
-
         }).then(() => {
-            hashHistory.push('/')
+          hashHistory.push('/');
         });
     }
 
@@ -38,13 +37,12 @@ class SongCreate extends Component{
                     <input
                         onChange={e => this.setState({title: e.target.value})}
                         value={this.state.title}/>
-
                 </form>
                 <Link to="/">
                     <i className="material-icons">home</i>
                 </Link>
             </div>
-        )
+        );
     }
 }
 
