@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {graphql} from 'react-apollo';
 import fetchSongLyrics from '../Queries/fetchSongLyrics';
 import {Link} from 'react-router';
+import LyricCreate from './LyricCreate';
 
 class SongDetail extends Component{
   renderSongLyrics(lyrics){
     return (
       lyrics.map(
-          l => <li key={l.id} className="collection-item">
+          l => <li
+              key={l.id} className="collection-item">
             {l.content}
           </li>
         )
@@ -16,16 +18,17 @@ class SongDetail extends Component{
 
   render(){
     const {song} = this.props.data;
-      if (song) {
+    if (song) {
         return (
             <div>
-            <Link to="/">
-            <i className="material-icons">home</i>
-            </Link>
-            <h3>{song.title}</h3>
-            <ul>
-            {this.renderSongLyrics(song.lyrics)}
-          </ul>
+                <Link to="/">
+                    <i className="material-icons">home</i>
+                </Link>
+                <h3>{song.title}</h3>
+                <ul className="collection" >
+                    {this.renderSongLyrics(song.lyrics)}
+                    </ul>
+                <LyricCreate songId={song.id}/>
           </div>
         );
       }
